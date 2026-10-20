@@ -9,19 +9,31 @@
     <link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
-
-    <header>
-        <div class="container header-content">
-            <div class="logo">وب <span>گرفت</span></div>
-            <nav>
-                <a href="#services">خدمات</a>
-                <a href="#news">اخبار</a>
-                <a href="#reviews">نظرات</a>
-                <a href="#order" class="btn-primary">ثبت سفارش</a>
+    <!-- هدر -->
+    <header class="main-header">
+        <div class="container">
+            <div class="header-top">
+                <a href="index.html" class="header-logo">وب <span>گرفت</span></a>
+                <div class="search-bar">
+                    <input type="text" placeholder="جستجو در خدمات وب گرفت...">
+                    <button><i class="fas fa-search"></i></button>
+                </div>
+                <div class="header-actions">
+                    <a href="admin.html" class="btn-admin"><i class="fas fa-user-shield"></i> پنل مدیریت</a>
+                    <a href="contact.html"><i class="fas fa-shopping-cart"></i></a>
+                </div>
+            </div>
+            <nav class="main-nav">
+                <a href="index.html" class="active">صفحه اصلی</a>
+                <a href="services.html">خدمات ما</a>
+                <a href="about.html">درباره ما</a>
+                <a href="contact.html">تماس و سفارش</a>
+                <a href="index.html#news">اخبار</a>
             </nav>
         </div>
     </header>
 
+    <!-- بنر اصلی -->
     <section class="hero">
         <div class="hero-glow"></div>
         <div class="container hero-content">
@@ -29,146 +41,95 @@
             <h1>دنیای وب را با <br><span>وب گرفت</span> فتح کنید</h1>
             <p>ما بهترین و مدرن‌ترین وب‌سایت‌ها را با بالاترین سرعت، امنیت و طراحی منحصر‌به‌فرد برای کسب‌وکار شما می‌سازیم.</p>
             <div class="hero-btns">
-                <a href="#order" class="btn-primary btn-large">همین حالا سفارش دهید</a>
-                <a href="#services" class="btn-secondary btn-large">مشاهده خدمات</a>
+                <a href="contact.html" class="btn-primary btn-large">همین حالا سفارش دهید</a>
+                <a href="services.html" class="btn-secondary btn-large">مشاهده خدمات</a>
             </div>
         </div>
     </section>
 
+    <!-- پیشنهاد ویژه -->
+    <section class="container">
+        <div class="promo-section">
+            <div class="promo-grid">
+                <div class="promo-item"><i class="fas fa-bolt"></i><h3>تحویل فوری</h3><p>سایت شما در کمترین زمان آماده می‌شود.</p></div>
+                <div class="promo-item"><i class="fas fa-shield-alt"></i><h3>امنیت بالا</h3><p>محافظت کامل از اطلاعات و سایت شما.</p></div>
+                <div class="promo-item"><i class="fas fa-headset"></i><h3>پشتیبانی ۲۴/۷</h3><p>همیشه در کنار شما هستیم.</p></div>
+                <div class="promo-item"><i class="fas fa-tags"></i><h3>تخفیف ویژه</h3><p>۲۰٪ تخفیف برای سفارش‌های جدید.</p></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- خلاصه خدمات -->
     <section id="services" class="services">
         <div class="container">
             <h2 class="section-title">خدمات <span>ویژه</span> ما</h2>
             <div class="service-grid">
-                <div class="glass-card">
-                    <div class="icon-box"><i class="fas fa-laptop-code"></i></div>
-                    <h3>طراحی سایت اختصاصی</h3>
-                    <p>طراحی وب‌سایت‌های مدرن، سریع و واکنش‌گرا مطابق با هویت برند شما.</p>
-                </div>
-                <div class="glass-card">
-                    <div class="icon-box"><i class="fas fa-shopping-cart"></i></div>
-                    <h3>فروشگاه اینترنتی</h3>
-                    <p>راه‌اندازی فروشگاه‌های آنلاین با درگاه پرداخت امن و پنل مدیریت قوی.</p>
-                </div>
-                <div class="glass-card">
-                    <div class="icon-box"><i class="fas fa-search"></i></div>
-                    <h3>سئو و بهینه‌سازی</h3>
-                    <p>بهینه‌سازی سایت شما برای موتورهای جستجو تا در گوگل رتبه اول را بگیرید.</p>
-                </div>
+                <div class="glass-card"><div class="icon-box"><i class="fas fa-laptop-code"></i></div><h3>طراحی سایت اختصاصی</h3><p>طراحی وب‌سایت‌های مدرن، سریع و واکنش‌گرا مطابق با هویت برند شما.</p><a href="services.html" class="btn-secondary" style="margin-top: 20px;">جزئیات بیشتر</a></div>
+                <div class="glass-card"><div class="icon-box"><i class="fas fa-shopping-cart"></i></div><h3>فروشگاه اینترنتی</h3><p>راه‌اندازی فروشگاه‌های آنلاین با درگاه پرداخت امن و پنل مدیریت قوی.</p><a href="services.html" class="btn-secondary" style="margin-top: 20px;">جزئیات بیشتر</a></div>
+                <div class="glass-card"><div class="icon-box"><i class="fas fa-search"></i></div><h3>سئو و بهینه‌سازی</h3><p>بهینه‌سازی سایت شما برای موتورهای جستجو تا در گوگل رتبه اول را بگیرید.</p><a href="services.html" class="btn-secondary" style="margin-top: 20px;">جزئیات بیشتر</a></div>
             </div>
         </div>
     </section>
 
+    <!-- اخبار -->
     <section id="news" class="news-section">
         <div class="container">
             <h2 class="section-title">آخرین <span>اخبار</span> ما</h2>
-            <div class="service-grid" id="news-container">
-                <p style="text-align: center; width: 100%; color: #aaa;">در حال بارگذاری اخبار...</p>
-            </div>
+            <div class="service-grid" id="news-container"><p style="text-align: center; width: 100%; color: #aaa;">در حال بارگذاری اخبار...</p></div>
         </div>
     </section>
 
+    <!-- نظرات -->
     <section id="reviews" class="reviews">
         <div class="container">
             <h2 class="section-title">مشتریان ما <span>چه می‌گویند؟</span></h2>
             <div class="service-grid">
-                <div class="glass-card review-card">
-                    <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
-                    <p class="review-text">"طراحی سایت فوق‌العاده حرفه‌ای بود. فروش ما بعد از راه‌اندازی سایت دو برابر شد! واقعا یک تیم حرفه‌ای و خوش‌فکر."</p>
-                    <h4>علی رضایی <span class="role">- مدیر فروشگاه</span></h4>
-                </div>
-                <div class="glass-card review-card">
-                    <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
-                    <p class="review-text">"سرعت و پشتیبانی وب گرفت واقعا بی‌نظیره. بهترین تیم طراحی که تا حالا دیدم. به همه پیشنهادش می‌کنم."</p>
-                    <h4>سارا محمدی <span class="role">- مدیر استارتاپ</span></h4>
-                </div>
+                <div class="glass-card review-card"><div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div><p class="review-text">"طراحی سایت فوق‌العاده حرفه‌ای بود. فروش ما بعد از راه‌اندازی سایت دو برابر شد!"</p><h4>علی رضایی <span class="role">- مدیر فروشگاه</span></h4></div>
+                <div class="glass-card review-card"><div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div><p class="review-text">"سرعت و پشتیبانی وب گرفت واقعا بی‌نظیره. بهترین تیم طراحی که تا حالا دیدم."</p><h4>سارا محمدی <span class="role">- مدیر استارتاپ</span></h4></div>
             </div>
         </div>
     </section>
 
-    <section id="order" class="order-section">
-        <div class="container">
-            <h2 class="section-title">ثبت <span>سفارش</span></h2>
-            <p class="order-desc">فرم زیر را پر کنید تا در سریع‌ترین زمان با شما تماس بگیریم.</p>
-            
-            <form action="https://formsubmit.co/webgereft@gmail.com" method="POST" class="order-form glass-card">
-                <input type="hidden" name="_captcha" value="false">
-                <input type="hidden" name="_subject" value="سفارش جدید از سایت وب گرفت!">
-                <input type="hidden" name="_template" value="table"> 
-
-                <div class="form-row">
-                    <div class="form-group">
-                        <label>نام و نام خانوادگی</label>
-                        <input type="text" name="name" required placeholder="مثلاً: احمد احمدی">
-                    </div>
-                    <div class="form-group">
-                        <label>شماره تماس</label>
-                        <input type="tel" name="phone" required placeholder="09123456789">
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label>نوع خدمت مورد نیاز</label>
-                    <select name="service" required>
-                        <option value="">انتخاب کنید...</option>
-                        <option value="طراحی سایت اختصاصی">طراحی سایت اختصاصی</option>
-                        <option value="فروشگاه اینترنتی">فروشگاه اینترنتی</option>
-                        <option value="سئو و بهینه‌سازی">سئو و بهینه‌سازی</option>
-                        <option value="سایر">سایر</option>
-                    </select>
-                </div>
-
-                <div class="form-group">
-                    <label>توضیحات پروژه شما</label>
-                    <textarea name="message" rows="4" placeholder="درباره ایده یا پروژه خود بنویسید..."></textarea>
-                </div>
-
-                <button type="submit" class="btn-primary btn-large" style="width: 100%;">ارسال درخواست</button>
-            </form>
-        </div>
-    </section>
-
+    <!-- فوتر -->
     <footer>
-        <div class="container">
-            <p>تماس با ما: <strong>webgereft@gmail.com</strong></p>
-            <p>© 2024 وب گرفت - تمامی حقوق محفوظ است.</p>
+        <div class="container footer-grid">
+            <div class="footer-col">
+                <h3 class="header-logo" style="font-size: 22px; margin-bottom: 15px;">وب <span>گرفت</span></h3>
+                <p>آژانس طراحی سایت و خدمات دیجیتال با بهترین کیفیت و نازل‌ترین قیمت.</p>
+            </div>
+            <div class="footer-col">
+                <h4>دسترسی سریع</h4>
+                <ul>
+                    <li><a href="index.html">صفحه اصلی</a></li>
+                    <li><a href="services.html">خدمات</a></li>
+                    <li><a href="about.html">درباره ما</a></li>
+                    <li><a href="contact.html">تماس با ما</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>ارتباط با ما</h4>
+                <p><i class="fas fa-envelope"></i> webgereft@gmail.com</p>
+                <p><i class="fas fa-phone"></i> ۰۲۱-۱۲۳۴۵۶۷۸</p>
+            </div>
         </div>
+        <div class="container footer-bottom">© 2024 وب گرفت - تمامی حقوق محفوظ است.</div>
     </footer>
 
+    <!-- اسکریپت Supabase -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script>
         const SUPABASE_URL = 'https://fvkzvfumabhhqzozxwlb.supabase.co'; 
         const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZ2a3p2ZnVtYWJoaHF6b3p4d2xiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTI1MDAzNzAsImV4cCI6MjEwODA3NjM3MH0.R4qUmFcN_c1U3wtYJoIPlg-BEt5yoeEl2Uo1cW62MNM';
-        
         const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
         async function fetchNews() {
             const container = document.getElementById('news-container');
-            const { data, error } = await supabase
-                .from('news')
-                .select('*')
-                .order('created_at', { ascending: false })
-                .limit(4);
-
-            if (error) {
-                container.innerHTML = '<p style="text-align: center; width: 100%; color: #aaa;">خطا در بارگذاری اخبار.</p>';
-                return;
-            }
-
-            if (data.length === 0) {
-                container.innerHTML = '<p style="text-align: center; width: 100%; color: #aaa;">هنوز خبری ثبت نشده است.</p>';
-                return;
-            }
-
+            const { data, error } = await supabase.from('news').select('*').order('created_at', { ascending: false }).limit(4);
+            if (error || data.length === 0) { container.innerHTML = '<p style="text-align: center; width: 100%; color: #aaa;">هنوز خبری ثبت نشده است.</p>'; return; }
             container.innerHTML = '';
             data.forEach(item => {
                 const date = new Date(item.created_at).toLocaleDateString('fa-IR');
-                container.innerHTML += `
-                    <div class="glass-card news-card">
-                        <div class="news-date"><i class="far fa-calendar-alt"></i> ${date}</div>
-                        <h3>${item.title}</h3>
-                        <p>${item.content}</p>
-                    </div>
-                `;
+                container.innerHTML += `<div class="glass-card news-card"><div class="news-date"><i class="far fa-calendar-alt"></i> ${date}</div><h3>${item.title}</h3><p>${item.content}</p></div>`;
             });
         }
         fetchNews();
