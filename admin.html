@@ -8,20 +8,15 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css" rel="stylesheet" type="text/css" />
     <style>
-        /* استایل اختصاصی پنل ادمین */
         body { background-color: #f8fafc; color: #1e293b; }
         .admin-container { max-width: 900px; margin: 120px auto 40px; padding: 30px; background: #fff; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
         .hidden { display: none !important; }
         .admin-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; }
-        
-        /* تب‌ها */
         .tabs { display: flex; gap: 10px; margin-bottom: 30px; border-bottom: 1px solid #e2e8f0; padding-bottom: 10px; }
         .tab-btn { background: none; border: none; font-family: inherit; font-size: 16px; color: #64748b; cursor: pointer; padding: 10px 20px; border-radius: 8px; transition: 0.3s; font-weight: 600; }
         .tab-btn.active { background: #fff7ed; color: #d97706; }
         .tab-content { display: none; }
         .tab-content.active { display: block; }
-        
-        /* آیتم‌های اخبار و نظرات */
         .item-box { background: #f8fafc; padding: 20px; border-radius: 12px; margin-bottom: 15px; border: 1px solid #e2e8f0; }
         .item-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
         .item-title { color: #0f172a; font-weight: bold; font-size: 18px; }
@@ -29,8 +24,6 @@
         .status-badge { font-size: 12px; padding: 4px 10px; border-radius: 20px; font-weight: bold; }
         .status-approved { background: #dcfce7; color: #166534; }
         .status-pending { background: #fef9c3; color: #854d0e; }
-        
-        /* دکمه‌های عملیات */
         .actions { display: flex; gap: 10px; margin-top: 15px; }
         .btn-sm { padding: 8px 16px; border-radius: 8px; border: none; cursor: pointer; font-family: inherit; color: white; font-size: 13px; font-weight: bold; transition: 0.3s; display: inline-flex; align-items: center; gap: 5px; }
         .btn-approve { background: #22c55e; }
@@ -41,29 +34,27 @@
 </head>
 <body>
     <div class="admin-container">
-        
-        <!-- بخش لاگین -->
+        <!-- صفحه لاگین -->
         <div id="login-section">
             <h2 class="section-title" style="text-align: center; margin-bottom: 30px;">ورود به <span>پنل مدیریت</span></h2>
             <form id="login-form" class="order-form">
                 <div class="form-group" style="margin-bottom: 20px;">
-                    <label style="display: block; margin-bottom: 8px; font-weight: bold;">ایمیل ادمین</label>
-                    <input type="email" id="email" required placeholder="ایمیل خود را وارد کنید" style="width: 100%; padding: 12px; border-radius: 8px; border: 1px solid #cbd5e1; font-family: inherit;">
+                    <label style="display: block; margin-bottom: 8px; font-weight: bold;">رمز عبور مدیریت</label>
+                    <input type="password" id="password" required placeholder="رمز را وارد کنید" style="width: 100%; padding: 12px; border-radius: 8px; border: 1px solid #cbd5e1; font-family: inherit;">
                 </div>
-                <div class="form-group" style="margin-bottom: 20px;">
-                    <label style="display: block; margin-bottom: 8px; font-weight: bold;">رمز عبور</label>
-                    <input type="password" id="password" required placeholder="********" style="width: 100%; padding: 12px; border-radius: 8px; border: 1px solid #cbd5e1; font-family: inherit;">
-                </div>
-                <button type="submit" class="btn-primary" style="width: 100%;">ورود به پنل</button>
+                <button type="submit" class="btn-primary" style="width: 100%;">ورود</button>
             </form>
             <p id="login-error" style="color: red; text-align: center; margin-top: 15px; font-weight: bold;"></p>
         </div>
 
-        <!-- بخش داشبورد (بعد از لاگین) -->
+        <!-- داشبورد -->
         <div id="dashboard-section" class="hidden">
             <div class="admin-header">
                 <h2 class="section-title" style="margin-bottom: 0; text-align: right;">پنل <span>مدیریت</span></h2>
-                <button id="logout-btn" class="btn-secondary" style="padding: 8px 20px; border-radius: 8px; border: 1px solid #cbd5e1; cursor: pointer;">خروج</button>
+                <div>
+                    <a href="index.html" class="btn-secondary" style="padding: 8px 15px; border-radius: 8px; border: 1px solid #cbd5e1; cursor: pointer; text-decoration: none; font-size: 14px; margin-left: 10px;">مشاهده سایت</a>
+                    <button id="logout-btn" class="btn-secondary" style="padding: 8px 15px; border-radius: 8px; border: 1px solid #cbd5e1; cursor: pointer; font-size: 14px;">خروج</button>
+                </div>
             </div>
 
             <div class="tabs">
@@ -71,7 +62,6 @@
                 <button class="tab-btn" onclick="switchTab('reviews')">مدیریت نظرات (تایید)</button>
             </div>
 
-            <!-- تب اخبار -->
             <div id="news-tab" class="tab-content active">
                 <form id="news-form" class="order-form" style="margin-bottom: 30px; background: #f8fafc; padding: 20px; border-radius: 12px; border: 1px solid #e2e8f0;">
                     <h3 style="margin-bottom: 15px; color: #0f172a;">افزودن خبر جدید</h3>
@@ -89,26 +79,25 @@
                 <div id="news-list"></div>
             </div>
 
-            <!-- تب نظرات -->
             <div id="reviews-tab" class="tab-content">
                 <h3 style="margin-bottom: 15px; color: #0f172a;">نظرات کاربران</h3>
-                <p style="color: #64748b; font-size: 14px; margin-bottom: 20px;">نظراتی که وضعیت <strong>در انتظار تایید</strong> دارند، در سایت نمایش داده نمی‌شوند. با کلیک روی دکمه سبز، آن‌ها را تایید کنید.</p>
+                <p style="color: #64748b; font-size: 14px; margin-bottom: 20px;">نظرات تایید نشده در سایت نمایش داده نمی‌شوند. با کلیک روی دکمه سبز، آن‌ها را تایید کنید.</p>
                 <div id="reviews-list"></div>
             </div>
-
         </div>
     </div>
 
-    <!-- اسکریپت Supabase -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script>
-        // اتصال به Supabase
+        // ========================================================
+        // ⚠️ رمز عبور پنل را از اینجا تغییر دهید (بین دو علامت ' ')
+        // ========================================================
+        const ADMIN_PASSWORD = '1234'; 
+
         const SUPABASE_URL = 'https://fvkzvfumabhhqzozxwlb.supabase.co'; 
         const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZ2a3p2ZnVtYWJoaHF6b3p4d2xiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTI1MDAzNzAsImV4cCI6MjEwODA3NjM3MH0.R4qUmFcN_c1U3wtYJoIPlg-BEt5yoeEl2Uo1cW62MNM';
-        
         const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
-        // مدیریت تب‌ها
         function switchTab(tabName) {
             document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
             document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
@@ -118,10 +107,9 @@
             if(tabName === 'reviews') loadReviews();
         }
 
-        // بررسی وضعیت لاگین
-        async function checkSession() {
-            const { data: { session } } = await supabase.auth.getSession();
-            if (session) {
+        // بررسی لاگین با localStorage
+        function checkSession() {
+            if (localStorage.getItem('admin_logged_in') === 'true') {
                 document.getElementById('login-section').classList.add('hidden');
                 document.getElementById('dashboard-section').classList.remove('hidden');
                 loadNews();
@@ -131,39 +119,30 @@
             }
         }
 
-        // ورود
-        document.getElementById('login-form').addEventListener('submit', async (e) => {
+        document.getElementById('login-form').addEventListener('submit', (e) => {
             e.preventDefault();
-            const email = document.getElementById('email').value;
-            const password = document.getElementById('password').value;
-            const { error } = await supabase.auth.signInWithPassword({ email, password });
-            if (error) {
-                document.getElementById('login-error').innerText = "ایمیل یا رمز عبور اشتباه است!";
-            } else {
+            const pass = document.getElementById('password').value;
+            if (pass === ADMIN_PASSWORD) {
+                localStorage.setItem('admin_logged_in', 'true');
                 document.getElementById('login-error').innerText = "";
                 checkSession();
+            } else {
+                document.getElementById('login-error').innerText = "رمز عبور اشتباه است!";
             }
         });
 
-        // خروج
-        document.getElementById('logout-btn').addEventListener('click', async () => {
-            await supabase.auth.signOut();
+        document.getElementById('logout-btn').addEventListener('click', () => {
+            localStorage.removeItem('admin_logged_in');
             checkSession();
         });
 
-        // ===== مدیریت اخبار =====
         document.getElementById('news-form').addEventListener('submit', async (e) => {
             e.preventDefault();
             const title = document.getElementById('news-title').value;
             const content = document.getElementById('news-content').value;
             const { error } = await supabase.from('news').insert([{ title: title, content: content }]);
-            if (error) {
-                alert("خطا در ثبت خبر: " + error.message);
-            } else {
-                alert("خبر با موفقیت ثبت شد!");
-                document.getElementById('news-form').reset();
-                loadNews();
-            }
+            if (error) alert("خطا: " + error.message);
+            else { alert("خبر ثبت شد!"); document.getElementById('news-form').reset(); loadNews(); }
         });
 
         async function loadNews() {
@@ -176,46 +155,29 @@
                     const date = new Date(item.created_at).toLocaleDateString('fa-IR');
                     newsList.innerHTML += `
                         <div class="item-box">
-                            <div class="item-header">
-                                <span class="item-title">${item.title}</span>
-                                <span class="item-meta">${date}</span>
-                            </div>
+                            <div class="item-header"><span class="item-title">${item.title}</span><span class="item-meta">${date}</span></div>
                             <p style="color: #475569; font-size: 14px; margin-bottom: 10px;">${item.content}</p>
-                            <div class="actions">
-                                <button class="btn-sm btn-delete" onclick="deleteNews(${item.id})"><i class="fas fa-trash"></i> حذف</button>
-                            </div>
+                            <div class="actions"><button class="btn-sm btn-delete" onclick="deleteNews(${item.id})"><i class="fas fa-trash"></i> حذف</button></div>
                         </div>`;
                 });
             }
         }
 
         async function deleteNews(id) {
-            if(confirm('آیا از حذف این خبر مطمئن هستید؟')) {
-                await supabase.from('news').delete().eq('id', id);
-                loadNews();
-            }
+            if(confirm('حذف شود؟')) { await supabase.from('news').delete().eq('id', id); loadNews(); }
         }
 
-        // ===== مدیریت نظرات =====
         async function loadReviews() {
             const reviewsList = document.getElementById('reviews-list');
             const { data } = await supabase.from('reviews').select('*').order('created_at', { ascending: false });
             if (data) {
                 reviewsList.innerHTML = '';
                 if(data.length === 0) reviewsList.innerHTML = '<p style="color:#64748b;">نظری ثبت نشده است.</p>';
-                
                 data.forEach(item => {
                     const isApproved = item.is_approved;
-                    const statusHtml = isApproved 
-                        ? '<span class="status-badge status-approved">تایید شده</span>' 
-                        : '<span class="status-badge status-pending">در انتظار تایید</span>';
-                    
-                    const approveBtn = isApproved 
-                        ? '' 
-                        : `<button class="btn-sm btn-approve" onclick="approveReview(${item.id})"><i class="fas fa-check"></i> تایید نظر</button>`;
-
+                    const statusHtml = isApproved ? '<span class="status-badge status-approved">تایید شده</span>' : '<span class="status-badge status-pending">در انتظار تایید</span>';
+                    const approveBtn = isApproved ? '' : `<button class="btn-sm btn-approve" onclick="approveReview(${item.id})"><i class="fas fa-check"></i> تایید نظر</button>`;
                     const date = new Date(item.created_at).toLocaleDateString('fa-IR');
-
                     reviewsList.innerHTML += `
                         <div class="item-box" style="border-right: 4px solid ${isApproved ? '#22c55e' : '#eab308'};">
                             <div class="item-header">
@@ -224,10 +186,7 @@
                             </div>
                             <span class="item-meta">${date}</span>
                             <p style="color: #475569; font-size: 14px; margin: 10px 0; line-height: 1.7;">${item.message}</p>
-                            <div class="actions">
-                                ${approveBtn}
-                                <button class="btn-sm btn-delete" onclick="deleteReview(${item.id})"><i class="fas fa-trash"></i> حذف</button>
-                            </div>
+                            <div class="actions">${approveBtn}<button class="btn-sm btn-delete" onclick="deleteReview(${item.id})"><i class="fas fa-trash"></i> حذف</button></div>
                         </div>`;
                 });
             }
@@ -235,19 +194,14 @@
 
         async function approveReview(id) {
             await supabase.from('reviews').update({ is_approved: true }).eq('id', id);
-            loadReviews(); // رفرش لیست
+            loadReviews();
         }
 
         async function deleteReview(id) {
-            if(confirm('آیا از حذف این نظر مطمئن هستید؟')) {
-                await supabase.from('reviews').delete().eq('id', id);
-                loadReviews();
-            }
+            if(confirm('حذف شود؟')) { await supabase.from('reviews').delete().eq('id', id); loadReviews(); }
         }
 
-        // شروع برنامه
         checkSession();
-        supabase.auth.onAuthStateChange(() => { checkSession(); });
     </script>
 </body>
 </html>
