@@ -9,6 +9,7 @@
     <link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
+    <!-- هدر -->
     <header class="main-header">
         <div class="container">
             <div class="header-top">
@@ -32,6 +33,7 @@
         </div>
     </header>
 
+    <!-- بنر اصلی (Hero) -->
     <section class="hero">
         <div class="hero-glow"></div>
         <div class="container hero-content">
@@ -77,7 +79,17 @@
         </div>
     </section>
 
-    <!-- نظرسنجی -->
+    <!-- نظرات مشتریان (تایید شده) -->
+    <section id="testimonials" class="reviews">
+        <div class="container">
+            <h2 class="section-title">مشتریان ما <span>چه می‌گویند؟</span></h2>
+            <div class="service-grid" id="reviews-container">
+                <p style="text-align: center; width: 100%; color: #64748b;">در حال بارگذاری نظرات...</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- فرم نظرسنجی -->
     <section id="survey" class="survey-section">
         <div class="container">
             <h2 class="section-title">نظر شما <span>چیست؟</span></h2>
@@ -136,23 +148,57 @@
         <div class="container footer-bottom">© 2024 وب گرفت - تمامی حقوق محفوظ است.</div>
     </footer>
 
+    <!-- اسکریپت Supabase -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script>
         const SUPABASE_URL = 'https://fvkzvfumabhhqzozxwlb.supabase.co'; 
         const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZ2a3p2ZnVtYWJoaHF6b3p4d2xiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTI1MDAzNzAsImV4cCI6MjEwODA3NjM3MH0.R4qUmFcN_c1U3wtYJoIPlg-BEt5yoeEl2Uo1cW62MNM';
         const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
+        // دریافت اخبار
         async function fetchNews() {
             const container = document.getElementById('news-container');
             const { data, error } = await supabase.from('news').select('*').order('created_at', { ascending: false }).limit(4);
-            if (error || data.length === 0) { container.innerHTML = '<p style="text-align: center; width: 100%; color: #64748b;">هنوز خبری ثبت نشده است.</p>'; return; }
+            if (error || data.length === 0) { 
+                container.innerHTML = '<p style="text-align: center; width: 100%; color: #64748b;">هنوز خبری ثبت نشده است.</p>'; 
+                return; 
+            }
             container.innerHTML = '';
             data.forEach(item => {
                 const date = new Date(item.created_at).toLocaleDateString('fa-IR');
-                container.innerHTML += `<div class="glass-card news-card"><div class="news-date" style="color:#d97706; margin-bottom:10px; font-size:14px;"><i class="far fa-calendar-alt"></i> ${date}</div><h3>${item.title}</h3><p>${item.content}</p></div>`;
+                container.innerHTML += `
+                    <div class="glass-card news-card">
+                        <div class="news-date" style="color:#d97706; margin-bottom:10px; font-size:14px;">
+                            <i class="far fa-calendar-alt"></i> ${date}
+                        </div>
+                        <h3>${item.title}</h3>
+                        <p>${item.content}</p>
+                    </div>`;
             });
         }
+
+        // دریافت نظرات تایید شده
+        async function fetchReviews() {
+            const container = document.getElementById('reviews-container');
+            const { data, error } = await supabase.from('reviews').select('*').eq('is_approved', true).order('created_at', { ascending: false }).limit(6);
+            
+            if (error || data.length === 0) { 
+                container.innerHTML = '<p style="text-align: center; width: 100%; color: #64748b;">هنوز نظری تایید نشده است.</p>'; 
+                return; 
+            }
+            container.innerHTML = '';
+            data.forEach(item => {
+                container.innerHTML += `
+                    <div class="glass-card review-card">
+                        <div class="stars" style="color: #f59e0b; margin-bottom:10px;">${'⭐'.repeat(item.rating)}</div>
+                        <p class="review-text" style="text-align: justify; margin-bottom:15px; font-size:15px; color:#475569;">"${item.message}"</p>
+                        <h4 style="color:#0f172a;">${item.name} <span class="role" style="color:#d97706; font-size:13px;">- مشتری</span></h4>
+                    </div>`;
+            });
+        }
+
         fetchNews();
+        fetchReviews();
     </script>
 </body>
 </html>
