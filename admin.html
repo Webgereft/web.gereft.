@@ -40,7 +40,6 @@
             <button class="tab-btn" onclick="switchTab('reviews')">مدیریت نظرات (تایید)</button>
         </div>
 
-        <!-- بخش اخبار -->
         <div id="news-tab" class="tab-content active">
             <form id="news-form" style="margin-bottom: 30px; background: #f8fafc; padding: 20px; border-radius: 12px; border: 1px solid #e2e8f0;">
                 <h3 style="margin-bottom: 15px; color: #0f172a;">افزودن خبر جدید</h3>
@@ -56,7 +55,6 @@
             <div id="news-list"></div>
         </div>
 
-        <!-- بخش نظرات -->
         <div id="reviews-tab" class="tab-content">
             <h3 style="margin-bottom: 15px; color: #0f172a;">نظرات کاربران</h3>
             <div id="reviews-list"></div>
@@ -110,7 +108,13 @@
 
         async function loadReviews() {
             const reviewsList = document.getElementById('reviews-list');
-            const { data } = await supabase.from('reviews').select('*').order('created_at', { ascending: false });
+            const { data, error } = await supabase.from('reviews').select('*').order('created_at', { ascending: false });
+            
+            if (error) {
+                reviewsList.innerHTML = `<p style="color:red;">خطا در دریافت اطلاعات: ${error.message}</p>`;
+                return;
+            }
+
             if (data) {
                 reviewsList.innerHTML = '';
                 if(data.length === 0) reviewsList.innerHTML = '<p>نظری ثبت نشده است.</p>';
@@ -121,7 +125,7 @@
                     reviewsList.innerHTML += `
                         <div class="item-box" style="border-right: 4px solid ${isApproved ? '#22c55e' : '#eab308'};">
                             <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
-                                <span class="item-title">${item.name}</span>
+                                <span class="item-title">${item.name} (${'⭐'.repeat(item.rating)})</span>
                                 ${statusHtml}
                             </div>
                             <p style="color: #475569; font-size: 14px; margin: 10px 0;">${item.message}</p>
@@ -132,7 +136,8 @@
         }
 
         async function approveReview(id) {
-            await supabase.from('reviews').update({ is_approved: true }).eq('id', id);
+            const { error } = await supabase.from('reviews').update({ is_approved: true }).eq('id', id);
+            if(error) alert("خطا در تایید: " + error.message);
             loadReviews();
         }
 
