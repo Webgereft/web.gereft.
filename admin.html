@@ -8,18 +8,26 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css" rel="stylesheet" type="text/css" />
     <style>
-        .admin-container { max-width: 800px; margin: 120px auto; padding: 40px; }
+        .admin-container { max-width: 900px; margin: 120px auto; padding: 30px; background: #fff; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
         .hidden { display: none; }
         .admin-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; }
-        .news-list { margin-top: 40px; }
-        .news-item { background: rgba(255,255,255,0.05); padding: 20px; border-radius: 12px; margin-bottom: 15px; border: 1px solid #333; display: flex; justify-content: space-between; align-items: center; }
-        .news-item h4 { color: #d4af37; margin-bottom: 5px; }
-        .news-item .actions button { background: none; border: none; color: #fff; cursor: pointer; margin-left: 10px; font-size: 16px; transition: 0.3s; }
-        .news-item .actions button:hover { color: #d4af37; }
+        .tabs { display: flex; gap: 10px; margin-bottom: 20px; border-bottom: 1px solid #e2e8f0; padding-bottom: 10px; }
+        .tab-btn { background: none; border: none; font-family: inherit; font-size: 16px; color: #64748b; cursor: pointer; padding: 10px 20px; border-radius: 8px; transition: 0.3s; }
+        .tab-btn.active { background: #fff7ed; color: #d97706; font-weight: bold; }
+        .tab-content { display: none; }
+        .tab-content.active { display: block; }
+        .news-item { background: #f8fafc; padding: 15px; border-radius: 10px; margin-bottom: 10px; border: 1px solid #e2e8f0; display: flex; justify-content: space-between; align-items: center; }
+        .news-item h4 { color: #0f172a; margin-bottom: 5px; }
+        .review-item { background: #f8fafc; padding: 15px; border-radius: 10px; margin-bottom: 10px; border: 1px solid #e2e8f0; }
+        .review-item.approved { border-right: 4px solid #22c55e; }
+        .review-item.pending { border-right: 4px solid #eab308; }
+        .btn-sm { padding: 6px 12px; border-radius: 6px; border: none; cursor: pointer; font-family: inherit; color: white; font-size: 13px; }
+        .btn-approve { background: #22c55e; }
+        .btn-delete { background: #ef4444; }
     </style>
 </head>
 <body>
-    <div class="admin-container glass-card">
+    <div class="admin-container">
         <div id="login-section">
             <h2 class="section-title">ورود به <span>پنل مدیریت</span></h2>
             <form id="login-form" class="order-form">
@@ -38,21 +46,36 @@
 
         <div id="dashboard-section" class="hidden">
             <div class="admin-header">
-                <h2 class="section-title" style="margin-bottom: 0;">مدیریت <span>اخبار</span></h2>
-                <button id="logout-btn" class="btn-secondary">خروج</button>
+                <h2 class="section-title" style="margin-bottom: 0;">پنل <span>مدیریت</span></h2>
+                <button id="logout-btn" class="btn-secondary" style="padding: 8px 15px;">خروج</button>
             </div>
-            <form id="news-form" class="order-form" style="max-width: 100%;">
-                <div class="form-group">
-                    <label>عنوان خبر</label>
-                    <input type="text" id="news-title" required placeholder="عنوان خبر...">
-                </div>
-                <div class="form-group">
-                    <label>متن خبر</label>
-                    <textarea id="news-content" rows="4" required placeholder="متن کامل خبر..."></textarea>
-                </div>
-                <button type="submit" class="btn-primary btn-large" style="width: 100%;">افزودن خبر</button>
-            </form>
-            <div id="news-list" class="news-list"></div>
+
+            <div class="tabs">
+                <button class="tab-btn active" onclick="switchTab('news')">مدیریت اخبار</button>
+                <button class="tab-btn" onclick="switchTab('reviews')">مدیریت نظرات (تایید)</button>
+            </div>
+
+            <!-- تب اخبار -->
+            <div id="news-tab" class="tab-content active">
+                <form id="news-form" class="order-form" style="margin-bottom: 30px;">
+                    <div class="form-group">
+                        <label>عنوان خبر</label>
+                        <input type="text" id="news-title" required placeholder="عنوان خبر...">
+                    </div>
+                    <div class="form-group">
+                        <label>متن خبر</label>
+                        <textarea id="news-content" rows="3" required placeholder="متن کامل خبر..."></textarea>
+                    </div>
+                    <button type="submit" class="btn-primary" style="width: 100%;">افزودن خبر</button>
+                </form>
+                <div id="news-list"></div>
+            </div>
+
+            <!-- تب نظرات -->
+            <div id="reviews-tab" class="tab-content">
+                <div id="reviews-list"></div>
+            </div>
+
         </div>
     </div>
 
@@ -62,6 +85,16 @@
         const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZ2a3p2ZnVtYWJoaHF6b3p4d2xiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTI1MDAzNzAsImV4cCI6MjEwODA3NjM3MH0.R4qUmFcN_c1U3wtYJoIPlg-BEt5yoeEl2Uo1cW62MNM';
         
         const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+        // مدیریت تب‌ها
+        function switchTab(tabName) {
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+            document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
+            document.getElementById(tabName + '-tab').classList.add('active');
+            event.target.classList.add('active');
+            if(tabName === 'news') loadNews();
+            if(tabName === 'reviews') loadReviews();
+        }
 
         async function checkSession() {
             const { data: { session } } = await supabase.auth.getSession();
@@ -75,6 +108,7 @@
             }
         }
 
+        // لاگین
         document.getElementById('login-form').addEventListener('submit', async (e) => {
             e.preventDefault();
             const email = document.getElementById('email').value;
@@ -88,55 +122,83 @@
             }
         });
 
+        // خروج
         document.getElementById('logout-btn').addEventListener('click', async () => {
             await supabase.auth.signOut();
             checkSession();
         });
 
+        // افزودن خبر
         document.getElementById('news-form').addEventListener('submit', async (e) => {
             e.preventDefault();
             const title = document.getElementById('news-title').value;
             const content = document.getElementById('news-content').value;
             const { error } = await supabase.from('news').insert([{ title: title, content: content }]);
-            if (error) {
-                alert("خطا در ذخیره خبر: " + error.message);
-            } else {
-                alert("خبر با موفقیت ثبت شد!");
-                document.getElementById('news-form').reset();
-                loadNews();
-            }
+            if (error) alert("خطا: " + error.message);
+            else { alert("خبر ثبت شد!"); document.getElementById('news-form').reset(); loadNews(); }
         });
 
+        // لود اخبار
         async function loadNews() {
             const newsList = document.getElementById('news-list');
-            const { data, error } = await supabase.from('news').select('*').order('created_at', { ascending: false });
+            const { data } = await supabase.from('news').select('*').order('created_at', { ascending: false });
             if (data) {
                 newsList.innerHTML = '';
                 data.forEach(item => {
-                    const date = new Date(item.created_at).toLocaleDateString('fa-IR');
                     newsList.innerHTML += `
                         <div class="news-item">
-                            <div>
-                                <h4>${item.title}</h4>
-                                <p style="color: #888; font-size: 14px;">${date}</p>
-                            </div>
-                            <div class="actions">
-                                <button onclick="deleteNews(${item.id})" title="حذف"><i class="fas fa-trash"></i></button>
-                            </div>
-                        </div>
-                    `;
+                            <div><h4>${item.title}</h4><p style="color: #64748b; font-size: 13px;">${item.content}</p></div>
+                            <button class="btn-sm btn-delete" onclick="deleteNews(${item.id})">حذف</button>
+                        </div>`;
                 });
             }
         }
 
+        // حذف خبر
         async function deleteNews(id) {
-            if(confirm('آیا مطمئنی میخوای این خبر رو حذف کنی؟')) {
-                await supabase.from('news').delete().eq('id', id);
-                loadNews();
+            if(confirm('حذف شود؟')) { await supabase.from('news').delete().eq('id', id); loadNews(); }
+        }
+
+        // لود نظرات
+        async function loadReviews() {
+            const reviewsList = document.getElementById('reviews-list');
+            const { data } = await supabase.from('reviews').select('*').order('created_at', { ascending: false });
+            if (data) {
+                reviewsList.innerHTML = '';
+                data.forEach(item => {
+                    const statusClass = item.is_approved ? 'approved' : 'pending';
+                    const statusText = item.is_approved ? 'تایید شده' : 'در انتظار تایید';
+                    const btnHtml = item.is_approved 
+                        ? `<button class="btn-sm btn-delete" onclick="deleteReview(${item.id})">حذف</button>`
+                        : `<button class="btn-sm btn-approve" onclick="approveReview(${item.id})">تایید</button> <button class="btn-sm btn-delete" onclick="deleteReview(${item.id})">حذف</button>`;
+
+                    reviewsList.innerHTML += `
+                        <div class="review-item ${statusClass}">
+                            <div style="display:flex; justify-content:space-between; margin-bottom:10px;">
+                                <strong>${item.name}</strong>
+                                <span style="font-size:12px; background:#e2e8f0; padding:2px 8px; border-radius:10px;">${statusText}</span>
+                            </div>
+                            <p style="color: #f59e0b; margin-bottom: 10px;">${'⭐'.repeat(item.rating)}</p>
+                            <p style="margin-bottom: 15px;">${item.message}</p>
+                            <div>${btnHtml}</div>
+                        </div>`;
+                });
             }
         }
+
+        // تایید نظر
+        async function approveReview(id) {
+            await supabase.from('reviews').update({ is_approved: true }).eq('id', id);
+            loadReviews();
+        }
+
+        // حذف نظر
+        async function deleteReview(id) {
+            if(confirm('حذف شود؟')) { await supabase.from('reviews').delete().eq('id', id); loadReviews(); }
+        }
+
         checkSession();
-        supabase.auth.onAuthStateChange((event, session) => { checkSession(); });
+        supabase.auth.onAuthStateChange(() => { checkSession(); });
     </script>
 </body>
 </html>
