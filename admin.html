@@ -37,13 +37,13 @@
         <!-- صفحه لاگین -->
         <div id="login-section">
             <h2 class="section-title" style="text-align: center; margin-bottom: 30px;">ورود به <span>پنل مدیریت</span></h2>
-            <form id="login-form" class="order-form">
-                <div class="form-group" style="margin-bottom: 20px;">
-                    <label style="display: block; margin-bottom: 8px; font-weight: bold;">رمز عبور مدیریت</label>
-                    <input type="password" id="password" required placeholder="رمز را وارد کنید" style="width: 100%; padding: 12px; border-radius: 8px; border: 1px solid #cbd5e1; font-family: inherit;">
-                </div>
-                <button type="submit" class="btn-primary" style="width: 100%;">ورود</button>
-            </form>
+            
+            <div class="form-group" style="margin-bottom: 20px;">
+                <label style="display: block; margin-bottom: 8px; font-weight: bold;">رمز عبور مدیریت</label>
+                <input type="password" id="password" placeholder="رمز را وارد کنید (1234)" style="width: 100%; padding: 12px; border-radius: 8px; border: 1px solid #cbd5e1; font-family: inherit;">
+            </div>
+            <button onclick="login()" class="btn-primary" style="width: 100%;">ورود</button>
+            
             <p id="login-error" style="color: red; text-align: center; margin-top: 15px; font-weight: bold;"></p>
         </div>
 
@@ -53,7 +53,7 @@
                 <h2 class="section-title" style="margin-bottom: 0; text-align: right;">پنل <span>مدیریت</span></h2>
                 <div>
                     <a href="index.html" class="btn-secondary" style="padding: 8px 15px; border-radius: 8px; border: 1px solid #cbd5e1; cursor: pointer; text-decoration: none; font-size: 14px; margin-left: 10px;">مشاهده سایت</a>
-                    <button id="logout-btn" class="btn-secondary" style="padding: 8px 15px; border-radius: 8px; border: 1px solid #cbd5e1; cursor: pointer; font-size: 14px;">خروج</button>
+                    <button onclick="logout()" class="btn-secondary" style="padding: 8px 15px; border-radius: 8px; border: 1px solid #cbd5e1; cursor: pointer; font-size: 14px;">خروج</button>
                 </div>
             </div>
 
@@ -90,13 +90,29 @@
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script>
         // ========================================================
-        // ⚠️ رمز عبور پنل را از اینجا تغییر دهید (بین دو علامت ' ')
+        // ⚠️ رمز عبور پنل را از اینجا تغییر دهید (پیش‌فرض: 1234)
         // ========================================================
         const ADMIN_PASSWORD = '1234'; 
 
         const SUPABASE_URL = 'https://fvkzvfumabhhqzozxwlb.supabase.co'; 
         const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZ2a3p2ZnVtYWJoaHF6b3p4d2xiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTI1MDAzNzAsImV4cCI6MjEwODA3NjM3MH0.R4qUmFcN_c1U3wtYJoIPlg-BEt5yoeEl2Uo1cW62MNM';
         const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+        function login() {
+            const pass = document.getElementById('password').value;
+            if (pass === ADMIN_PASSWORD) {
+                localStorage.setItem('admin_logged_in', 'true');
+                document.getElementById('login-error').innerText = "";
+                checkSession();
+            } else {
+                document.getElementById('login-error').innerText = "رمز عبور اشتباه است! (رمز صحیح: 1234)";
+            }
+        }
+
+        function logout() {
+            localStorage.removeItem('admin_logged_in');
+            checkSession();
+        }
 
         function switchTab(tabName) {
             document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
@@ -107,7 +123,6 @@
             if(tabName === 'reviews') loadReviews();
         }
 
-        // بررسی لاگین با localStorage
         function checkSession() {
             if (localStorage.getItem('admin_logged_in') === 'true') {
                 document.getElementById('login-section').classList.add('hidden');
@@ -118,23 +133,6 @@
                 document.getElementById('dashboard-section').classList.add('hidden');
             }
         }
-
-        document.getElementById('login-form').addEventListener('submit', (e) => {
-            e.preventDefault();
-            const pass = document.getElementById('password').value;
-            if (pass === ADMIN_PASSWORD) {
-                localStorage.setItem('admin_logged_in', 'true');
-                document.getElementById('login-error').innerText = "";
-                checkSession();
-            } else {
-                document.getElementById('login-error').innerText = "رمز عبور اشتباه است!";
-            }
-        });
-
-        document.getElementById('logout-btn').addEventListener('click', () => {
-            localStorage.removeItem('admin_logged_in');
-            checkSession();
-        });
 
         document.getElementById('news-form').addEventListener('submit', async (e) => {
             e.preventDefault();
@@ -201,6 +199,7 @@
             if(confirm('حذف شود؟')) { await supabase.from('reviews').delete().eq('id', id); loadReviews(); }
         }
 
+        // لود اولیه
         checkSession();
     </script>
 </body>
