@@ -11,14 +11,9 @@
         body { background-color: #f8fafc; color: #1e293b; }
         .admin-container { max-width: 900px; margin: 40px auto; padding: 30px; background: #fff; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
         .admin-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; border-bottom: 1px solid #e2e8f0; padding-bottom: 15px; }
-        .tabs { display: flex; gap: 10px; margin-bottom: 30px; }
-        .tab-btn { background: none; border: none; font-family: inherit; font-size: 16px; color: #64748b; cursor: pointer; padding: 10px 20px; border-radius: 8px; font-weight: 600; }
-        .tab-btn.active { background: #fff7ed; color: #d97706; }
-        .tab-content { display: none; }
-        .tab-content.active { display: block; }
+        .section-box { margin-bottom: 50px; }
         .item-box { background: #f8fafc; padding: 20px; border-radius: 12px; margin-bottom: 15px; border: 1px solid #e2e8f0; }
         .item-title { color: #0f172a; font-weight: bold; font-size: 18px; }
-        .item-meta { color: #64748b; font-size: 13px; }
         .status-badge { font-size: 12px; padding: 4px 10px; border-radius: 20px; font-weight: bold; }
         .status-approved { background: #dcfce7; color: #166534; }
         .status-pending { background: #fef9c3; color: #854d0e; }
@@ -35,14 +30,10 @@
             <a href="index.html" class="btn-secondary" style="padding: 8px 15px; border-radius: 8px; border: 1px solid #cbd5e1; text-decoration: none; font-size: 14px;">مشاهده سایت</a>
         </div>
 
-        <div class="tabs">
-            <button class="tab-btn active" onclick="switchTab('news')">مدیریت اخبار</button>
-            <button class="tab-btn" onclick="switchTab('reviews')">مدیریت نظرات (تایید)</button>
-        </div>
-
-        <div id="news-tab" class="tab-content active">
+        <!-- بخش اول: مدیریت اخبار -->
+        <div class="section-box">
+            <h3 style="margin-bottom: 15px; color: #0f172a; border-bottom: 2px solid #d97706; padding-bottom: 10px; display: inline-block;">مدیریت اخبار</h3>
             <form id="news-form" style="margin-bottom: 30px; background: #f8fafc; padding: 20px; border-radius: 12px; border: 1px solid #e2e8f0;">
-                <h3 style="margin-bottom: 15px; color: #0f172a;">افزودن خبر جدید</h3>
                 <div style="margin-bottom: 15px;">
                     <input type="text" id="news-title" required placeholder="عنوان خبر..." style="width: 100%; padding: 10px; border-radius: 8px; border: 1px solid #cbd5e1; font-family: inherit;">
                 </div>
@@ -51,12 +42,13 @@
                 </div>
                 <button type="submit" class="btn-primary" style="width: 100%; padding: 12px; border-radius: 8px; border: none; background: #d97706; color: white; cursor: pointer; font-weight: bold;">ثبت خبر</button>
             </form>
-            <h3 style="margin-bottom: 15px; color: #0f172a;">اخبار ثبت شده</h3>
             <div id="news-list"></div>
         </div>
 
-        <div id="reviews-tab" class="tab-content">
-            <h3 style="margin-bottom: 15px; color: #0f172a;">نظرات کاربران</h3>
+        <!-- بخش دوم: مدیریت نظرات -->
+        <div class="section-box">
+            <h3 style="margin-bottom: 15px; color: #0f172a; border-bottom: 2px solid #d97706; padding-bottom: 10px; display: inline-block;">مدیریت نظرات (تایید)</h3>
+            <p style="color: #64748b; font-size: 14px; margin-bottom: 20px;">نظراتی که در انتظار تایید هستند، در سایت نمایش داده نمی‌شوند. با کلیک روی دکمه سبز آن‌ها را تایید کنید.</p>
             <div id="reviews-list"></div>
         </div>
     </div>
@@ -67,15 +59,7 @@
         const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZ2a3p2ZnVtYWJoaHF6b3p4d2xiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTI1MDAzNzAsImV4cCI6MjEwODA3NjM3MH0.R4qUmFcN_c1U3wtYJoIPlg-BEt5yoeEl2Uo1cW62MNM';
         const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
-        function switchTab(tabName) {
-            document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
-            document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
-            document.getElementById(tabName + '-tab').classList.add('active');
-            event.target.classList.add('active');
-            if(tabName === 'news') loadNews();
-            if(tabName === 'reviews') loadReviews();
-        }
-
+        // ===== مدیریت اخبار =====
         document.getElementById('news-form').addEventListener('submit', async (e) => {
             e.preventDefault();
             const title = document.getElementById('news-title').value;
@@ -90,7 +74,7 @@
             const { data } = await supabase.from('news').select('*').order('created_at', { ascending: false });
             if (data) {
                 newsList.innerHTML = '';
-                if(data.length === 0) newsList.innerHTML = '<p>خبری ثبت نشده است.</p>';
+                if(data.length === 0) newsList.innerHTML = '<p style="color:#64748b;">خبری ثبت نشده است.</p>';
                 data.forEach(item => {
                     newsList.innerHTML += `
                         <div class="item-box">
@@ -106,18 +90,19 @@
             if(confirm('حذف شود؟')) { await supabase.from('news').delete().eq('id', id); loadNews(); }
         }
 
+        // ===== مدیریت نظرات =====
         async function loadReviews() {
             const reviewsList = document.getElementById('reviews-list');
             const { data, error } = await supabase.from('reviews').select('*').order('created_at', { ascending: false });
             
             if (error) {
-                reviewsList.innerHTML = `<p style="color:red;">خطا در دریافت اطلاعات: ${error.message}</p>`;
+                reviewsList.innerHTML = `<p style="color:red; background:#fee2e2; padding:10px; border-radius:8px;">خطا در دریافت اطلاعات: ${error.message}</p>`;
                 return;
             }
 
             if (data) {
                 reviewsList.innerHTML = '';
-                if(data.length === 0) reviewsList.innerHTML = '<p>نظری ثبت نشده است.</p>';
+                if(data.length === 0) reviewsList.innerHTML = '<p style="color:#64748b;">نظری ثبت نشده است.</p>';
                 data.forEach(item => {
                     const isApproved = item.is_approved;
                     const statusHtml = isApproved ? '<span class="status-badge status-approved">تایید شده</span>' : '<span class="status-badge status-pending">در انتظار تایید</span>';
@@ -125,7 +110,7 @@
                     reviewsList.innerHTML += `
                         <div class="item-box" style="border-right: 4px solid ${isApproved ? '#22c55e' : '#eab308'};">
                             <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
-                                <span class="item-title">${item.name} (${'⭐'.repeat(item.rating)})</span>
+                                <span class="item-title">${item.name} <span style="color:#f59e0b; font-size:14px;">(${'⭐'.repeat(item.rating)})</span></span>
                                 ${statusHtml}
                             </div>
                             <p style="color: #475569; font-size: 14px; margin: 10px 0;">${item.message}</p>
@@ -145,7 +130,9 @@
             if(confirm('حذف شود؟')) { await supabase.from('reviews').delete().eq('id', id); loadReviews(); }
         }
 
+        // اجرای اولیه (هر دو بخش همزمان لود میشن)
         loadNews();
+        loadReviews();
     </script>
 </body>
 </html>
