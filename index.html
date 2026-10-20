@@ -89,22 +89,14 @@
                 <!-- ستون اول: فرم نظرسنجی -->
                 <div>
                     <h3 style="color: #0f172a; margin-bottom: 20px; font-size: 22px;">نظر خود را ثبت کنید</h3>
-                    <form action="https://formsubmit.co/webgereft@gmail.com" method="POST" class="order-form glass-card">
-                        <input type="hidden" name="_captcha" value="false">
-                        <input type="hidden" name="_subject" value="نظر جدید از سایت وب گرفت!">
-                        <input type="hidden" name="_template" value="table">
-                        <input type="hidden" name="type" value="نظرسنجی">
-                        
-                        <!-- این خط باعث میشه بعد از ارسال، به صفحه اصلی برگرده (دقت کن به نقطه بعد از gereft) -->
-                        <input type="hidden" name="_next" value="https://webgereft.github.io/web.gereft./index.html#survey">
-
+                    <form id="review-form" class="order-form glass-card">
                         <div class="form-group">
                             <label>نام شما</label>
-                            <input type="text" name="name" required placeholder="مثلاً: علی">
+                            <input type="text" id="rev-name" required placeholder="مثلاً: علی">
                         </div>
                         <div class="form-group">
                             <label>امتیاز شما به وب گرفت</label>
-                            <select name="rating" required>
+                            <select id="rev-rating" required>
                                 <option value="5">⭐⭐⭐⭐⭐ (عالی)</option>
                                 <option value="4">⭐⭐⭐⭐ (خوب)</option>
                                 <option value="3">⭐⭐⭐ (متوسط)</option>
@@ -114,9 +106,10 @@
                         </div>
                         <div class="form-group">
                             <label>متن نظر یا پیشنهاد شما</label>
-                            <textarea name="message" rows="3" required placeholder="نظر خود را بنویسید..."></textarea>
+                            <textarea id="rev-message" rows="3" required placeholder="نظر خود را بنویسید..."></textarea>
                         </div>
-                        <button type="submit" class="btn-primary btn-large" style="width: 100%;">ارسال نظر</button>
+                        <button type="submit" id="submit-btn" class="btn-primary btn-large" style="width: 100%;">ارسال نظر</button>
+                        <p id="form-msg" style="text-align:center; margin-top:15px; font-weight:bold; font-size:15px;"></p>
                     </form>
                 </div>
 
@@ -163,7 +156,6 @@
         const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZ2a3p2ZnVtYWJoaHF6b3p4d2xiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTI1MDAzNzAsImV4cCI6MjEwODA3NjM3MH0.R4qUmFcN_c1U3wtYJoIPlg-BEt5yoeEl2Uo1cW62MNM';
         const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
-        // دریافت اخبار
         async function fetchNews() {
             const container = document.getElementById('news-container');
             const { data, error } = await supabase.from('news').select('*').order('created_at', { ascending: false }).limit(4);
@@ -185,7 +177,6 @@
             });
         }
 
-        // دریافت نظرات تایید شده
         async function fetchReviews() {
             const container = document.getElementById('reviews-container');
             const { data, error } = await supabase.from('reviews').select('*').eq('is_approved', true).order('created_at', { ascending: false }).limit(5);
@@ -206,6 +197,58 @@
                     </div>`;
             });
         }
+
+        document.getElementById('review-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const btn = document.getElementById('submit-btn');
+            const msg = document.getElementById('form-msg');
+            
+            btn.disabled = true;
+            btn.innerText = "در حال ارسال...";
+            msg.innerText = "لطفا صبر کنید...";
+            msg.style.color = "#d97706";
+
+            const name = document.getElementById('rev-name').value;
+            const rating = parseInt(document.getElementById('rev-rating').value);
+            const message = document.getElementById('rev-message').value;
+
+            const { error } = await supabase.from('reviews').insert([
+                { name: name, rating: rating, message: message, is_approved: false }
+            ]);
+            
+            if (error) {
+                msg.style.color = "red";
+                msg.innerText = "خطا در ثبت: " + error.message;
+                btn.disabled = false;
+                btn.innerText = "ارسال نظر";
+            } else {
+                // پیام تشکر
+                msg.style.color = "#16a34a"; // رنگ سبز
+                msg.innerText = "✅ ممنون از نظرتون! نظر شما ثبت شد و پس از تایید مدیر نمایش داده می‌شود.";
+                
+                // ارسال به ایمیل (در پس‌زمینه)
+                const formData = new FormData();
+                formData.append('name', name);
+                formData.append('rating', rating);
+                formData.append('message', message);
+                formData.append('type', 'نظرسنجی');
+                formData.append('_subject', 'نظر جدید از سایت وب گرفت!');
+                
+                fetch('https://formsubmit.co/webgereft@gmail.com', {
+                    method: 'POST',
+                    body: formData
+                }).catch(err => console.log('ایمیل ارسال نشد', err));
+
+                // خالی کردن فرم
+                document.getElementById('review-form').reset();
+                btn.disabled = false;
+                btn.innerText = "ارسال نظر";
+                
+                // آپدیت لیست نظرات (اگر نظر جدید تایید شده بود، نشون بده)
+                fetchReviews();
+            }
+        });
 
         fetchNews();
         fetchReviews();
