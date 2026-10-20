@@ -9,17 +9,16 @@
     <link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
-    <!-- هدر -->
+    <!-- هدر (بدون پنل مدیریت) -->
     <header class="main-header">
         <div class="container">
             <div class="header-top">
                 <a href="index.html" class="header-logo">وب <span>گرفت</span></a>
                 <div class="search-bar">
-                    <input type="text" placeholder="جستجو در خدمات وب گرفت...">
+                    <input type="text" placeholder="جستجو در خدمات...">
                     <button><i class="fas fa-search"></i></button>
                 </div>
                 <div class="header-actions">
-                    <a href="admin.html" class="btn-admin"><i class="fas fa-user-shield"></i> پنل مدیریت</a>
                     <a href="contact.html"><i class="fas fa-shopping-cart"></i></a>
                 </div>
             </div>
@@ -28,6 +27,7 @@
                 <a href="services.html">خدمات ما</a>
                 <a href="about.html">درباره ما</a>
                 <a href="contact.html">تماس و سفارش</a>
+                <a href="index.html#survey">نظرسنجی</a>
                 <a href="index.html#news">اخبار</a>
             </nav>
         </div>
@@ -39,7 +39,7 @@
         <div class="container hero-content">
             <div class="badge">✨ آژانس طراحی برتر</div>
             <h1>دنیای وب را با <br><span>وب گرفت</span> فتح کنید</h1>
-            <p>ما بهترین و مدرن‌ترین وب‌سایت‌ها را با بالاترین سرعت، امنیت و طراحی منحصر‌به‌فرد برای کسب‌وکار شما می‌سازیم.</p>
+            <p>ما بهترین و مدرن‌ترین وب‌سایت‌ها را با بالاترین سرعت و امنیت برای کسب‌وکار شما می‌سازیم.</p>
             <div class="hero-btns">
                 <a href="contact.html" class="btn-primary btn-large">همین حالا سفارش دهید</a>
                 <a href="services.html" class="btn-secondary btn-large">مشاهده خدمات</a>
@@ -47,19 +47,20 @@
         </div>
     </section>
 
-    <!-- پیشنهاد ویژه -->
-    <section class="container">
-        <div class="promo-section">
-            <div class="promo-grid">
-                <div class="promo-item"><i class="fas fa-bolt"></i><h3>تحویل فوری</h3><p>سایت شما در کمترین زمان آماده می‌شود.</p></div>
-                <div class="promo-item"><i class="fas fa-shield-alt"></i><h3>امنیت بالا</h3><p>محافظت کامل از اطلاعات و سایت شما.</p></div>
-                <div class="promo-item"><i class="fas fa-headset"></i><h3>پشتیبانی ۲۴/۷</h3><p>همیشه در کنار شما هستیم.</p></div>
-                <div class="promo-item"><i class="fas fa-tags"></i><h3>تخفیف ویژه</h3><p>۲۰٪ تخفیف برای سفارش‌های جدید.</p></div>
-            </div>
+    <!-- اسلایدر کشیدنی (مثل دیجی‌کالا) -->
+    <section class="slider-section container">
+        <h2 class="section-title" style="font-size: 28px; margin-bottom: 30px;">پیشنهادهای <span>ویژه</span></h2>
+        <div class="slider-container">
+            <div class="slider-card"><i class="fas fa-bolt"></i><h3>تحویل فوری</h3><p>سایت شما در کمترین زمان آماده می‌شود.</p></div>
+            <div class="slider-card"><i class="fas fa-shield-alt"></i><h3>امنیت بالا</h3><p>محافظت کامل از اطلاعات و سایت شما.</p></div>
+            <div class="slider-card"><i class="fas fa-headset"></i><h3>پشتیبانی ۲۴/۷</h3><p>همیشه در کنار شما هستیم.</p></div>
+            <div class="slider-card"><i class="fas fa-tags"></i><h3>تخفیف ۲۰٪</h3><p>برای سفارش‌های جدید در این ماه.</p></div>
+            <div class="slider-card"><i class="fas fa-chart-line"></i><h3>سئو حرفه‌ای</h3><p>رتبه اول گوگل را بگیرید.</p></div>
+            <div class="slider-card"><i class="fas fa-mobile-alt"></i><h3>طراحی موبایل</h3><p>کاملاً واکنش‌گرا و مدرن.</p></div>
         </div>
     </section>
 
-    <!-- خلاصه خدمات -->
+    <!-- خدمات -->
     <section id="services" class="services">
         <div class="container">
             <h2 class="section-title">خدمات <span>ویژه</span> ما</h2>
@@ -75,18 +76,46 @@
     <section id="news" class="news-section">
         <div class="container">
             <h2 class="section-title">آخرین <span>اخبار</span> ما</h2>
-            <div class="service-grid" id="news-container"><p style="text-align: center; width: 100%; color: #aaa;">در حال بارگذاری اخبار...</p></div>
+            <div class="service-grid" id="news-container"><p style="text-align: center; width: 100%; color: #94a3b8;">در حال بارگذاری اخبار...</p></div>
         </div>
     </section>
 
-    <!-- نظرات -->
-    <section id="reviews" class="reviews">
+    <!-- بخش نظرسنجی (نظرات مشتریان) -->
+    <section id="survey" class="survey-section">
         <div class="container">
-            <h2 class="section-title">مشتریان ما <span>چه می‌گویند؟</span></h2>
-            <div class="service-grid">
-                <div class="glass-card review-card"><div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div><p class="review-text">"طراحی سایت فوق‌العاده حرفه‌ای بود. فروش ما بعد از راه‌اندازی سایت دو برابر شد!"</p><h4>علی رضایی <span class="role">- مدیر فروشگاه</span></h4></div>
-                <div class="glass-card review-card"><div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div><p class="review-text">"سرعت و پشتیبانی وب گرفت واقعا بی‌نظیره. بهترین تیم طراحی که تا حالا دیدم."</p><h4>سارا محمدی <span class="role">- مدیر استارتاپ</span></h4></div>
-            </div>
+            <h2 class="section-title">نظر شما <span>چیست؟</span></h2>
+            <p class="order-desc">نظر خود را درباره وب گرفت با ما به اشتراک بگذارید. (نظر شما به صورت خصوصی برای مدیریت ارسال می‌شود)</p>
+            
+            <form action="https://formsubmit.co/webgereft@gmail.com" method="POST" class="order-form glass-card" style="max-width: 600px;">
+                <input type="hidden" name="_captcha" value="false">
+                <input type="hidden" name="_subject" value="نظر جدید از سایت وب گرفت!">
+                <input type="hidden" name="_template" value="table">
+                <input type="hidden" name="type" value="نظرسنجی">
+
+                <div class="form-group">
+                    <label>نام شما</label>
+                    <input type="text" name="name" required placeholder="مثلاً: علی">
+                </div>
+                <div class="form-group">
+                    <label>ایمیل (اختیاری)</label>
+                    <input type="email" name="email" placeholder="example@email.com">
+                </div>
+                <div class="form-group">
+                    <label>امتیاز شما به وب گرفت (از ۱ تا ۵)</label>
+                    <select name="rating" required>
+                        <option value="5">⭐⭐⭐⭐⭐ (عالی)</option>
+                        <option value="4">⭐⭐⭐⭐ (خوب)</option>
+                        <option value="3">⭐⭐⭐ (متوسط)</option>
+                        <option value="2">⭐⭐ (ضعیف)</option>
+                        <option value="1">⭐ (خیلی ضعیف)</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>متن نظر یا پیشنهاد شما</label>
+                    <textarea name="message" rows="4" required placeholder="نظر خود را بنویسید..."></textarea>
+                </div>
+                <button type="submit" class="btn-primary btn-large" style="width: 100%;">ارسال نظر</button>
+            </form>
         </div>
     </section>
 
@@ -95,7 +124,7 @@
         <div class="container footer-grid">
             <div class="footer-col">
                 <h3 class="header-logo" style="font-size: 22px; margin-bottom: 15px;">وب <span>گرفت</span></h3>
-                <p>آژانس طراحی سایت و خدمات دیجیتال با بهترین کیفیت و نازل‌ترین قیمت.</p>
+                <p>آژانس طراحی سایت و خدمات دیجیتال با بهترین کیفیت.</p>
             </div>
             <div class="footer-col">
                 <h4>دسترسی سریع</h4>
@@ -109,7 +138,6 @@
             <div class="footer-col">
                 <h4>ارتباط با ما</h4>
                 <p><i class="fas fa-envelope"></i> webgereft@gmail.com</p>
-                <p><i class="fas fa-phone"></i> ۰۲۱-۱۲۳۴۵۶۷۸</p>
             </div>
         </div>
         <div class="container footer-bottom">© 2024 وب گرفت - تمامی حقوق محفوظ است.</div>
@@ -125,7 +153,7 @@
         async function fetchNews() {
             const container = document.getElementById('news-container');
             const { data, error } = await supabase.from('news').select('*').order('created_at', { ascending: false }).limit(4);
-            if (error || data.length === 0) { container.innerHTML = '<p style="text-align: center; width: 100%; color: #aaa;">هنوز خبری ثبت نشده است.</p>'; return; }
+            if (error || data.length === 0) { container.innerHTML = '<p style="text-align: center; width: 100%; color: #94a3b8;">هنوز خبری ثبت نشده است.</p>'; return; }
             container.innerHTML = '';
             data.forEach(item => {
                 const date = new Date(item.created_at).toLocaleDateString('fa-IR');
