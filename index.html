@@ -10,19 +10,18 @@
 </head>
 <body>
 
-    <!-- هدر شیشه‌ای و لوکس -->
     <header>
         <div class="container header-content">
             <div class="logo">وب <span>گرفت</span></div>
             <nav>
                 <a href="#services">خدمات</a>
+                <a href="#news">اخبار</a>
                 <a href="#reviews">نظرات</a>
-                <a href="#order" class="btn-primary">شروع همکاری</a>
+                <a href="#order" class="btn-primary">ثبت سفارش</a>
             </nav>
         </div>
     </header>
 
-    <!-- بخش اصلی (Hero) با نور و گرادیانت فوق‌العاده -->
     <section class="hero">
         <div class="hero-glow"></div>
         <div class="container hero-content">
@@ -36,7 +35,6 @@
         </div>
     </section>
 
-    <!-- بخش خدمات با کارت‌های شیشه‌ای -->
     <section id="services" class="services">
         <div class="container">
             <h2 class="section-title">خدمات <span>ویژه</span> ما</h2>
@@ -60,7 +58,15 @@
         </div>
     </section>
 
-    <!-- بخش نظرات با استایل پریمیوم -->
+    <section id="news" class="news-section">
+        <div class="container">
+            <h2 class="section-title">آخرین <span>اخبار</span> ما</h2>
+            <div class="service-grid" id="news-container">
+                <p style="text-align: center; width: 100%; color: #aaa;">در حال بارگذاری اخبار...</p>
+            </div>
+        </div>
+    </section>
+
     <section id="reviews" class="reviews">
         <div class="container">
             <h2 class="section-title">مشتریان ما <span>چه می‌گویند؟</span></h2>
@@ -79,7 +85,6 @@
         </div>
     </section>
 
-    <!-- بخش ثبت سفارش -->
     <section id="order" class="order-section">
         <div class="container">
             <h2 class="section-title">ثبت <span>سفارش</span></h2>
@@ -129,5 +134,44 @@
         </div>
     </footer>
 
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script>
+        const SUPABASE_URL = 'YOUR_SUPABASE_URL'; 
+        const SUPABASE_ANON_KEY = 'YOUR_SUPABASE_ANON_KEY';
+        
+        const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+        async function fetchNews() {
+            const container = document.getElementById('news-container');
+            const { data, error } = await supabase
+                .from('news')
+                .select('*')
+                .order('created_at', { ascending: false })
+                .limit(4);
+
+            if (error) {
+                container.innerHTML = '<p style="text-align: center; width: 100%; color: #aaa;">خطا در بارگذاری اخبار.</p>';
+                return;
+            }
+
+            if (data.length === 0) {
+                container.innerHTML = '<p style="text-align: center; width: 100%; color: #aaa;">هنوز خبری ثبت نشده است.</p>';
+                return;
+            }
+
+            container.innerHTML = '';
+            data.forEach(item => {
+                const date = new Date(item.created_at).toLocaleDateString('fa-IR');
+                container.innerHTML += `
+                    <div class="glass-card news-card">
+                        <div class="news-date"><i class="far fa-calendar-alt"></i> ${date}</div>
+                        <h3>${item.title}</h3>
+                        <p>${item.content}</p>
+                    </div>
+                `;
+            });
+        }
+        fetchNews();
+    </script>
 </body>
 </html>
