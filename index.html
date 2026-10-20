@@ -9,7 +9,6 @@
     <link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
-    <!-- هدر (بدون پنل مدیریت) -->
     <header class="main-header">
         <div class="container">
             <div class="header-top">
@@ -33,11 +32,10 @@
         </div>
     </header>
 
-    <!-- بنر اصلی -->
     <section class="hero">
         <div class="hero-glow"></div>
         <div class="container hero-content">
-            <div class="badge">✨ آژانس طراحی برتر</div>
+            <div class="badge" style="display:inline-block; background:#fff7ed; color:#d97706; padding:6px 15px; border-radius:50px; font-size:14px; font-weight:600; margin-bottom:20px; border:1px solid #fed7aa;">✨ آژانس طراحی برتر</div>
             <h1>دنیای وب را با <br><span>وب گرفت</span> فتح کنید</h1>
             <p>ما بهترین و مدرن‌ترین وب‌سایت‌ها را با بالاترین سرعت و امنیت برای کسب‌وکار شما می‌سازیم.</p>
             <div class="hero-btns">
@@ -47,16 +45,15 @@
         </div>
     </section>
 
-    <!-- اسلایدر کشیدنی (مثل دیجی‌کالا) -->
+    <!-- اسلایدر (کشیدنی به چپ و راست) -->
     <section class="slider-section container">
-        <h2 class="section-title" style="font-size: 28px; margin-bottom: 30px;">پیشنهادهای <span>ویژه</span></h2>
+        <h2 class="section-title" style="font-size: 24px; text-align: right; margin-bottom: 20px;">پیشنهادهای <span>ویژه</span> (برای دیدن بقیه بکشید)</h2>
         <div class="slider-container">
             <div class="slider-card"><i class="fas fa-bolt"></i><h3>تحویل فوری</h3><p>سایت شما در کمترین زمان آماده می‌شود.</p></div>
             <div class="slider-card"><i class="fas fa-shield-alt"></i><h3>امنیت بالا</h3><p>محافظت کامل از اطلاعات و سایت شما.</p></div>
             <div class="slider-card"><i class="fas fa-headset"></i><h3>پشتیبانی ۲۴/۷</h3><p>همیشه در کنار شما هستیم.</p></div>
             <div class="slider-card"><i class="fas fa-tags"></i><h3>تخفیف ۲۰٪</h3><p>برای سفارش‌های جدید در این ماه.</p></div>
             <div class="slider-card"><i class="fas fa-chart-line"></i><h3>سئو حرفه‌ای</h3><p>رتبه اول گوگل را بگیرید.</p></div>
-            <div class="slider-card"><i class="fas fa-mobile-alt"></i><h3>طراحی موبایل</h3><p>کاملاً واکنش‌گرا و مدرن.</p></div>
         </div>
     </section>
 
@@ -76,17 +73,17 @@
     <section id="news" class="news-section">
         <div class="container">
             <h2 class="section-title">آخرین <span>اخبار</span> ما</h2>
-            <div class="service-grid" id="news-container"><p style="text-align: center; width: 100%; color: #94a3b8;">در حال بارگذاری اخبار...</p></div>
+            <div class="service-grid" id="news-container"><p style="text-align: center; width: 100%; color: #64748b;">در حال بارگذاری اخبار...</p></div>
         </div>
     </section>
 
-    <!-- بخش نظرسنجی (نظرات مشتریان) -->
+    <!-- نظرسنجی -->
     <section id="survey" class="survey-section">
         <div class="container">
             <h2 class="section-title">نظر شما <span>چیست؟</span></h2>
-            <p class="order-desc">نظر خود را درباره وب گرفت با ما به اشتراک بگذارید. (نظر شما به صورت خصوصی برای مدیریت ارسال می‌شود)</p>
+            <p class="order-desc">نظر خود را درباره وب گرفت با ما به اشتراک بگذارید.</p>
             
-            <form action="https://formsubmit.co/webgereft@gmail.com" method="POST" class="order-form glass-card" style="max-width: 600px;">
+            <form action="https://formsubmit.co/webgereft@gmail.com" method="POST" class="order-form glass-card">
                 <input type="hidden" name="_captcha" value="false">
                 <input type="hidden" name="_subject" value="نظر جدید از سایت وب گرفت!">
                 <input type="hidden" name="_template" value="table">
@@ -97,11 +94,7 @@
                     <input type="text" name="name" required placeholder="مثلاً: علی">
                 </div>
                 <div class="form-group">
-                    <label>ایمیل (اختیاری)</label>
-                    <input type="email" name="email" placeholder="example@email.com">
-                </div>
-                <div class="form-group">
-                    <label>امتیاز شما به وب گرفت (از ۱ تا ۵)</label>
+                    <label>امتیاز شما به وب گرفت</label>
                     <select name="rating" required>
                         <option value="5">⭐⭐⭐⭐⭐ (عالی)</option>
                         <option value="4">⭐⭐⭐⭐ (خوب)</option>
@@ -112,7 +105,7 @@
                 </div>
                 <div class="form-group">
                     <label>متن نظر یا پیشنهاد شما</label>
-                    <textarea name="message" rows="4" required placeholder="نظر خود را بنویسید..."></textarea>
+                    <textarea name="message" rows="3" required placeholder="نظر خود را بنویسید..."></textarea>
                 </div>
                 <button type="submit" class="btn-primary btn-large" style="width: 100%;">ارسال نظر</button>
             </form>
@@ -123,7 +116,7 @@
     <footer>
         <div class="container footer-grid">
             <div class="footer-col">
-                <h3 class="header-logo" style="font-size: 22px; margin-bottom: 15px;">وب <span>گرفت</span></h3>
+                <h3 class="header-logo" style="font-size: 20px; margin-bottom: 15px;">وب <span>گرفت</span></h3>
                 <p>آژانس طراحی سایت و خدمات دیجیتال با بهترین کیفیت.</p>
             </div>
             <div class="footer-col">
@@ -143,7 +136,6 @@
         <div class="container footer-bottom">© 2024 وب گرفت - تمامی حقوق محفوظ است.</div>
     </footer>
 
-    <!-- اسکریپت Supabase -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script>
         const SUPABASE_URL = 'https://fvkzvfumabhhqzozxwlb.supabase.co'; 
@@ -153,11 +145,11 @@
         async function fetchNews() {
             const container = document.getElementById('news-container');
             const { data, error } = await supabase.from('news').select('*').order('created_at', { ascending: false }).limit(4);
-            if (error || data.length === 0) { container.innerHTML = '<p style="text-align: center; width: 100%; color: #94a3b8;">هنوز خبری ثبت نشده است.</p>'; return; }
+            if (error || data.length === 0) { container.innerHTML = '<p style="text-align: center; width: 100%; color: #64748b;">هنوز خبری ثبت نشده است.</p>'; return; }
             container.innerHTML = '';
             data.forEach(item => {
                 const date = new Date(item.created_at).toLocaleDateString('fa-IR');
-                container.innerHTML += `<div class="glass-card news-card"><div class="news-date"><i class="far fa-calendar-alt"></i> ${date}</div><h3>${item.title}</h3><p>${item.content}</p></div>`;
+                container.innerHTML += `<div class="glass-card news-card"><div class="news-date" style="color:#d97706; margin-bottom:10px; font-size:14px;"><i class="far fa-calendar-alt"></i> ${date}</div><h3>${item.title}</h3><p>${item.content}</p></div>`;
             });
         }
         fetchNews();
