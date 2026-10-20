@@ -66,7 +66,7 @@
             <div class="service-grid">
                 <div class="glass-card"><div class="icon-box"><i class="fas fa-laptop-code"></i></div><h3>طراحی سایت اختصاصی</h3><p>طراحی وب‌سایت‌های مدرن، سریع و واکنش‌گرا مطابق با هویت برند شما.</p><a href="services.html" class="btn-secondary" style="margin-top: 20px;">جزئیات بیشتر</a></div>
                 <div class="glass-card"><div class="icon-box"><i class="fas fa-shopping-cart"></i></div><h3>فروشگاه اینترنتی</h3><p>راه‌اندازی فروشگاه‌های آنلاین با درگاه پرداخت امن و پنل مدیریت قوی.</p><a href="services.html" class="btn-secondary" style="margin-top: 20px;">جزئیات بیشتر</a></div>
-                <div class="glass-card"><div class="icon-box"><i class="fas fa-search"></i></div><h3>سئو و بهینه‌سازی</h3><p>بهینه‌سازی سایت شما برای موتورهای جستجو تا در گوگل رتبه اول را بگیرید.</p><a href="services.html" class="btn-secondary" style="margin-top: 20px;">جزئیات بیشتر</a></div>
+            <div class="glass-card"><div class="icon-box"><i class="fas fa-search"></i></div><h3>سئو و بهینه‌سازی</h3><p>بهینه‌سازی سایت شما برای موتورهای جستجو تا در گوگل رتبه اول را بگیرید.</p><a href="services.html" class="btn-secondary" style="margin-top: 20px;">جزئیات بیشتر</a></div>
             </div>
         </div>
     </section>
@@ -79,48 +79,53 @@
         </div>
     </section>
 
-    <!-- نظرات مشتریان (تایید شده) -->
-    <section id="testimonials" class="reviews">
-        <div class="container">
-            <h2 class="section-title">مشتریان ما <span>چه می‌گویند؟</span></h2>
-            <div class="service-grid" id="reviews-container">
-                <p style="text-align: center; width: 100%; color: #64748b;">در حال بارگذاری نظرات...</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- فرم نظرسنجی -->
+    <!-- بخش ترکیبی نظرات و نظرسنجی -->
     <section id="survey" class="survey-section">
         <div class="container">
-            <h2 class="section-title">نظر شما <span>چیست؟</span></h2>
-            <p class="order-desc">نظر خود را درباره وب گرفت با ما به اشتراک بگذارید.</p>
+            <h2 class="section-title">نظرات و <span>نظرسنجی</span></h2>
             
-            <form action="https://formsubmit.co/webgereft@gmail.com" method="POST" class="order-form glass-card">
-                <input type="hidden" name="_captcha" value="false">
-                <input type="hidden" name="_subject" value="نظر جدید از سایت وب گرفت!">
-                <input type="hidden" name="_template" value="table">
-                <input type="hidden" name="type" value="نظرسنجی">
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 40px; align-items: start;">
+                
+                <!-- ستون اول: فرم نظرسنجی -->
+                <div>
+                    <h3 style="color: #0f172a; margin-bottom: 20px; font-size: 22px;">نظر خود را ثبت کنید</h3>
+                    <form action="https://formsubmit.co/webgereft@gmail.com" method="POST" class="order-form glass-card">
+                        <input type="hidden" name="_captcha" value="false">
+                        <input type="hidden" name="_subject" value="نظر جدید از سایت وب گرفت!">
+                        <input type="hidden" name="_template" value="table">
+                        <input type="hidden" name="type" value="نظرسنجی">
 
-                <div class="form-group">
-                    <label>نام شما</label>
-                    <input type="text" name="name" required placeholder="مثلاً: علی">
+                        <div class="form-group">
+                            <label>نام شما</label>
+                            <input type="text" name="name" required placeholder="مثلاً: علی">
+                        </div>
+                        <div class="form-group">
+                            <label>امتیاز شما به وب گرفت</label>
+                            <select name="rating" required>
+                                <option value="5">⭐⭐⭐⭐⭐ (عالی)</option>
+                                <option value="4">⭐⭐⭐⭐ (خوب)</option>
+                                <option value="3">⭐⭐⭐ (متوسط)</option>
+                                <option value="2">⭐⭐ (ضعیف)</option>
+                                <option value="1">⭐ (خیلی ضعیف)</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>متن نظر یا پیشنهاد شما</label>
+                            <textarea name="message" rows="3" required placeholder="نظر خود را بنویسید..."></textarea>
+                        </div>
+                        <button type="submit" class="btn-primary btn-large" style="width: 100%;">ارسال نظر</button>
+                    </form>
                 </div>
-                <div class="form-group">
-                    <label>امتیاز شما به وب گرفت</label>
-                    <select name="rating" required>
-                        <option value="5">⭐⭐⭐⭐⭐ (عالی)</option>
-                        <option value="4">⭐⭐⭐⭐ (خوب)</option>
-                        <option value="3">⭐⭐⭐ (متوسط)</option>
-                        <option value="2">⭐⭐ (ضعیف)</option>
-                        <option value="1">⭐ (خیلی ضعیف)</option>
-                    </select>
+
+                <!-- ستون دوم: نمایش نظرات تایید شده -->
+                <div>
+                    <h3 style="color: #0f172a; margin-bottom: 20px; font-size: 22px;">نظرات مشتریان ما</h3>
+                    <div id="reviews-container" style="display: flex; flex-direction: column; gap: 15px;">
+                        <p style="text-align: center; color: #64748b;">در حال بارگذاری نظرات...</p>
+                    </div>
                 </div>
-                <div class="form-group">
-                    <label>متن نظر یا پیشنهاد شما</label>
-                    <textarea name="message" rows="3" required placeholder="نظر خود را بنویسید..."></textarea>
-                </div>
-                <button type="submit" class="btn-primary btn-large" style="width: 100%;">ارسال نظر</button>
-            </form>
+
+            </div>
         </div>
     </section>
 
@@ -177,22 +182,24 @@
             });
         }
 
-        // دریافت نظرات تایید شده
+        // دریافت نظرات تایید شده برای نمایش در کنار فرم
         async function fetchReviews() {
             const container = document.getElementById('reviews-container');
-            const { data, error } = await supabase.from('reviews').select('*').eq('is_approved', true).order('created_at', { ascending: false }).limit(6);
+            const { data, error } = await supabase.from('reviews').select('*').eq('is_approved', true).order('created_at', { ascending: false }).limit(5);
             
             if (error || data.length === 0) { 
-                container.innerHTML = '<p style="text-align: center; width: 100%; color: #64748b;">هنوز نظری تایید نشده است.</p>'; 
+                container.innerHTML = '<p style="text-align: center; color: #64748b; background: #fff; padding: 20px; border-radius: 12px; border: 1px solid #e2e8f0;">هنوز نظری تایید نشده است.</p>'; 
                 return; 
             }
             container.innerHTML = '';
             data.forEach(item => {
                 container.innerHTML += `
-                    <div class="glass-card review-card">
-                        <div class="stars" style="color: #f59e0b; margin-bottom:10px;">${'⭐'.repeat(item.rating)}</div>
-                        <p class="review-text" style="text-align: justify; margin-bottom:15px; font-size:15px; color:#475569;">"${item.message}"</p>
-                        <h4 style="color:#0f172a;">${item.name} <span class="role" style="color:#d97706; font-size:13px;">- مشتری</span></h4>
+                    <div class="glass-card" style="padding: 20px; text-align: right;">
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+                            <strong style="color: #0f172a;">${item.name}</strong>
+                            <span style="color: #f59e0b;">${'⭐'.repeat(item.rating)}</span>
+                        </div>
+                        <p style="color: #475569; font-size: 14px; line-height: 1.7;">${item.message}</p>
                     </div>`;
             });
         }
