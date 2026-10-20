@@ -47,7 +47,7 @@
         </div>
     </section>
 
-    <!-- اسلایدر (کشیدنی به چپ و راست) -->
+    <!-- اسلایدر -->
     <section class="slider-section container">
         <h2 class="section-title" style="font-size: 24px; text-align: right; margin-bottom: 20px;">پیشنهادهای <span>ویژه</span> (برای دیدن بقیه بکشید)</h2>
         <div class="slider-container">
@@ -66,7 +66,7 @@
             <div class="service-grid">
                 <div class="glass-card"><div class="icon-box"><i class="fas fa-laptop-code"></i></div><h3>طراحی سایت اختصاصی</h3><p>طراحی وب‌سایت‌های مدرن، سریع و واکنش‌گرا مطابق با هویت برند شما.</p><a href="services.html" class="btn-secondary" style="margin-top: 20px;">جزئیات بیشتر</a></div>
                 <div class="glass-card"><div class="icon-box"><i class="fas fa-shopping-cart"></i></div><h3>فروشگاه اینترنتی</h3><p>راه‌اندازی فروشگاه‌های آنلاین با درگاه پرداخت امن و پنل مدیریت قوی.</p><a href="services.html" class="btn-secondary" style="margin-top: 20px;">جزئیات بیشتر</a></div>
-            <div class="glass-card"><div class="icon-box"><i class="fas fa-search"></i></div><h3>سئو و بهینه‌سازی</h3><p>بهینه‌سازی سایت شما برای موتورهای جستجو تا در گوگل رتبه اول را بگیرید.</p><a href="services.html" class="btn-secondary" style="margin-top: 20px;">جزئیات بیشتر</a></div>
+                <div class="glass-card"><div class="icon-box"><i class="fas fa-search"></i></div><h3>سئو و بهینه‌سازی</h3><p>بهینه‌سازی سایت شما برای موتورهای جستجو تا در گوگل رتبه اول را بگیرید.</p><a href="services.html" class="btn-secondary" style="margin-top: 20px;">جزئیات بیشتر</a></div>
             </div>
         </div>
     </section>
@@ -94,6 +94,9 @@
                         <input type="hidden" name="_subject" value="نظر جدید از سایت وب گرفت!">
                         <input type="hidden" name="_template" value="table">
                         <input type="hidden" name="type" value="نظرسنجی">
+                        
+                        <!-- این خط باعث میشه بعد از ارسال، به صفحه اصلی برگرده -->
+                        <input type="hidden" name="_next" value="https://webgereft.github.io/web.gereft/index.html#survey">
 
                         <div class="form-group">
                             <label>نام شما</label>
@@ -182,7 +185,7 @@
             });
         }
 
-        // دریافت نظرات تایید شده برای نمایش در کنار فرم
+        // دریافت نظرات تایید شده
         async function fetchReviews() {
             const container = document.getElementById('reviews-container');
             const { data, error } = await supabase.from('reviews').select('*').eq('is_approved', true).order('created_at', { ascending: false }).limit(5);
