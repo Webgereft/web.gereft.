@@ -1,7 +1,7 @@
 @import url('https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css');
 
 :root {
-    --primary: #d97706; /* نارنجی/طلایی خاص */
+    --primary: #d97706; 
     --primary-light: #f59e0b;
     --bg: #f8fafc; 
     --surface: #ffffff;
@@ -21,12 +21,12 @@ body {
     color: var(--text-main); 
     line-height: 1.7; 
     overflow-x: hidden; 
-    padding-top: 130px; /* جلوگیری از تداخل با هدر */
+    padding-top: 130px; 
 }
 
 .container { width: 92%; max-width: 1300px; margin: 0 auto; }
 
-/* ===== هدر شیک و مدرن ===== */
+/* ===== هدر ===== */
 .main-header { 
     background: rgba(255, 255, 255, 0.98); 
     backdrop-filter: blur(15px); 
@@ -41,7 +41,6 @@ body {
 .header-logo { font-size: 26px; font-weight: 900; color: var(--text-main); text-decoration: none; letter-spacing: -1px; }
 .header-logo span { color: var(--primary); }
 
-/* نوار جستجو */
 .search-bar { flex-grow: 1; max-width: 500px; margin: 0 30px; position: relative; }
 .search-bar input { 
     width: 100%; padding: 12px 20px; 
@@ -63,7 +62,6 @@ body {
 .header-actions a { color: var(--text-muted); font-size: 20px; text-decoration: none; transition: 0.3s; }
 .header-actions a:hover { color: var(--primary); }
 
-/* منوی اصلی */
 .main-nav { 
     display: flex; justify-content: center; gap: 30px; 
     padding: 12px 0; overflow-x: auto; scrollbar-width: none; 
@@ -82,7 +80,7 @@ body {
 .main-nav a:hover::after, .main-nav a.active::after { width: 100%; }
 .main-nav a:hover, .main-nav a.active { color: var(--primary); }
 
-/* ===== دکمه‌های جذاب ===== */
+/* ===== دکمه‌ها ===== */
 .btn-primary, .btn-secondary { 
     display: inline-flex; align-items: center; justify-content: center; 
     padding: 14px 32px; border-radius: 50px; font-weight: 800; font-size: 16px; 
@@ -107,7 +105,7 @@ body {
     transform: translateY(-3px);
 }
 
-/* ===== بخش Hero با گرادیانت ===== */
+/* ===== بخش Hero ===== */
 .hero { 
     padding: 100px 0 80px; 
     text-align: center; 
@@ -122,7 +120,7 @@ body {
 .hero p { font-size: 20px; color: var(--text-muted); max-width: 800px; margin: 0 auto 45px; }
 .hero-btns { display: flex; gap: 20px; justify-content: center; flex-wrap: wrap; }
 
-/* ===== بخش آمار (مشتری راضی ۱۰۰+) ===== */
+/* ===== آمار ===== */
 .stats-section { padding: 20px 0 60px; margin-top: -20px; position: relative; z-index: 10; }
 .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 25px; }
 .stat-card { 
@@ -151,7 +149,7 @@ body {
 .slider-card h3 { color: var(--text-main); font-size: 20px; margin-bottom: 10px; font-weight: 800; }
 .slider-card p { color: var(--text-muted); font-size: 14px; }
 
-/* ===== کارت‌های خدمات و اخبار ===== */
+/* ===== کارت‌ها ===== */
 .services, .reviews, .news-section, .survey-section { padding: 80px 0; }
 .section-title { text-align: center; font-size: 38px; font-weight: 900; margin-bottom: 50px; color: var(--text-main); }
 .section-title span { color: var(--primary); }
@@ -213,7 +211,7 @@ footer { background: #fff; border-top: 1px solid var(--border); padding: 60px 0 
 .footer-col p { color: var(--text-muted); margin-bottom: 10px; font-size: 15px; }
 .footer-bottom { text-align: center; border-top: 1px solid var(--border); padding-top: 25px; color: var(--text-muted); font-size: 14px; }
 
-/* ===== ریسپانسیو (موبایل) ===== */
+/* ===== موبایل ===== */
 @media (max-width: 768px) {
     body { padding-top: 150px; }
     .header-top { flex-direction: column; gap: 15px; }
