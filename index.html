@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
+    <!-- هدر -->
     <header class="main-header">
         <div class="container">
             <div class="header-top">
@@ -31,6 +32,7 @@
         </div>
     </header>
 
+    <!-- بنر اصلی -->
     <section class="hero">
         <div class="container">
             <h1>دنیای وب را با <br><span>وب گرفت</span> فتح کنید</h1>
@@ -42,8 +44,9 @@
         </div>
     </section>
 
+    <!-- اسلایدر -->
     <section class="slider-section container">
-        <h2 class="section-title" style="font-size: 28px; text-align: right; margin-bottom: 25px;">پیشنهادهای <span>ویژه</span></h2>
+        <h2 class="slider-title">پیشنهادهای <span>ویژه</span></h2>
         <div class="slider-container">
             <div class="slider-card"><i class="fas fa-bolt"></i><h3>تحویل فوری</h3><p>سایت شما در کمترین زمان آماده می‌شود.</p></div>
             <div class="slider-card"><i class="fas fa-shield-alt"></i><h3>امنیت بالا</h3><p>محافظت کامل از اطلاعات و سایت شما.</p></div>
@@ -52,6 +55,7 @@
         </div>
     </section>
 
+    <!-- خدمات -->
     <section id="services" class="services">
         <div class="container">
             <h2 class="section-title">خدمات <span>ویژه</span> ما</h2>
@@ -63,6 +67,7 @@
         </div>
     </section>
 
+    <!-- اخبار -->
     <section id="news" class="news-section">
         <div class="container">
             <h2 class="section-title">آخرین <span>اخبار</span> ما</h2>
@@ -70,12 +75,13 @@
         </div>
     </section>
 
+    <!-- نظرات و نظرسنجی -->
     <section id="survey" class="survey-section">
         <div class="container">
             <h2 class="section-title">نظرات و <span>نظرسنجی</span></h2>
             <div class="survey-grid">
                 <div>
-                    <h3 style="margin-bottom: 20px; font-size: 20px;">نظر خود را ثبت کنید</h3>
+                    <h3 style="margin-bottom: 20px; font-size: 22px; font-weight: 800;">نظر خود را ثبت کنید</h3>
                     <form id="review-form" class="order-form">
                         <div class="form-group">
                             <label>نام شما</label>
@@ -100,7 +106,7 @@
                     </form>
                 </div>
                 <div>
-                    <h3 style="margin-bottom: 20px; font-size: 20px;">نظرات مشتریان ما</h3>
+                    <h3 style="margin-bottom: 20px; font-size: 22px; font-weight: 800;">نظرات مشتریان ما</h3>
                     <div id="reviews-container">
                         <p style="text-align: center; color: #64748b;">در حال بارگذاری نظرات...</p>
                     </div>
@@ -109,11 +115,12 @@
         </div>
     </section>
 
+    <!-- فوتر -->
     <footer>
         <div class="container">
             <div class="footer-grid">
                 <div class="footer-col">
-                    <h3 class="header-logo" style="font-size: 20px; margin-bottom: 15px;">وب <span>گرفت</span></h3>
+                    <h3 class="header-logo" style="font-size: 24px; margin-bottom: 15px;">وب <span>گرفت</span></h3>
                     <p>آژانس طراحی سایت و خدمات دیجیتال با بهترین کیفیت.</p>
                 </div>
                 <div class="footer-col">
@@ -127,13 +134,14 @@
                 </div>
                 <div class="footer-col">
                     <h4>ارتباط با ما</h4>
-                    <p><i class="fas fa-envelope"></i> webgereft@gmail.com</p>
+                    <p><i class="fas fa-envelope" style="color: var(--primary); margin-left: 5px;"></i> webgereft@gmail.com</p>
                 </div>
             </div>
             <div class="footer-bottom">© 2024 وب گرفت - تمامی حقوق محفوظ است.</div>
         </div>
     </footer>
 
+    <!-- اسکریپت Supabase -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script>
         const SUPABASE_URL = 'https://fvkzvfumabhhqzozxwlb.supabase.co'; 
